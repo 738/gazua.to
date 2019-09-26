@@ -10,7 +10,7 @@ import { getRandomPostfix } from './util/GeneralUtil';
 
 admin.initializeApp(functions.config().firebase);
 
-var db = admin.firestore();
+let db = admin.firestore();
 
 export const helloWorld = functions.https.onRequest((request, response) => {
     response.send("Hello from Firebase!");
@@ -61,6 +61,14 @@ export const getShortUrl = functions.https.onRequest(async (request: TypedReques
             short_url,
             url,
         });
+        response.send({
+            result_code: 0,
+            message: 'success',
+            data: {
+                short_url: 'https://gazua.to/' + short_url,
+            }
+        });
+        return;
     }
 
     // let docRef = db.collection('gazua-to').doc(short_url);
